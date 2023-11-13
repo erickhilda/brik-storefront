@@ -5,8 +5,10 @@
 ### API
 
 - [ ] landing page api
-- [ ] product list api
-- [ ] product detail api
+- [ ] product api
+- [ ] product-category api
+  - [x] get all product-category api
+  - [ ] get only product-category for navbar menu
 - [ ] cart api
 - [ ] profile api
 
