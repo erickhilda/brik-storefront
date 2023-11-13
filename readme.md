@@ -16,9 +16,9 @@
 
 - [ ] layout and styling
   - [x] setup tailwindcss custom rules
-  - [ ] navbar
-  - [ ] footer
-  - [ ] base layout
+  - [x] navbar
+  - [x] footer
+  - [x] base layout
 - [ ] landing page
 - [ ] product list page
 - [ ] product detail page
