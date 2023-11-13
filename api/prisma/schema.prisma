@@ -16,6 +16,7 @@ model User {
 model Product_Category {
   id       Int       @id @default(autoincrement())
   name     String    @unique
+  path     String?   @unique
   products Product[]
 }
 
