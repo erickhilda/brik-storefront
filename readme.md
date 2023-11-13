@@ -14,6 +14,11 @@
 
 ### CLIENT
 
+- [ ] layout and styling
+  - [x] setup tailwindcss custom rules
+  - [ ] navbar
+  - [ ] footer
+  - [ ] base layout
 - [ ] landing page
 - [ ] product list page
 - [ ] product detail page
