@@ -8,9 +8,22 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id         String        @id @default(uuid())
+  email      String        @unique
+  name       String        @unique
+  password   String
+  role       RoleEnumType? @default(user)
+  created_at DateTime      @default(now())
+  updated_at DateTime?     @updatedAt
+  deleted_at DateTime?
+
+  @@index([email])
+  @@map("users")
+}
+
+enum RoleEnumType {
+  user
+  admin
 }
 
 model Product_Category {
@@ -24,6 +37,7 @@ model Product_Category {
 
   @@unique([name, path])
   @@index([name, path])
+  @@map("product_categories")
 }
 
 model Product {
@@ -40,4 +54,5 @@ model Product {
 
   @@unique([name, category_id])
   @@index([name, category_id])
+  @@map("products")
 }
