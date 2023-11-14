@@ -1,14 +1,15 @@
 import { SortFilterItem } from '@/lib/constants';
 import FilterItemDropdown from './dropdown';
 import { FilterItem } from './item';
+import { ProductCategory } from '@/lib/api/types';
 
-export type ListItem = SortFilterItem | PathFilterItem;
-export type PathFilterItem = { title: string; path: string };
+export type ListItem = SortFilterItem | PathFilterItem | ProductCategory;
+export type PathFilterItem = { name: string; path: string };
 
 function FilterItemList({ list }: { list: ListItem[] }) {
   return (
     <>
-      {list.map((item: ListItem, i) => (
+      {list.map((item, i) => (
         <FilterItem key={i} item={item} />
       ))}
     </>
