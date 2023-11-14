@@ -18,7 +18,6 @@ export default async function SearchPage({
     sorting.find((item) => item.slug === sort) || defaultSort;
 
   const products = await api.productApi.getProduct();
-  console.log("🚀 ~ products:", products);
   const resultsText = products && products?.length > 1 ? "results" : "result";
 
   return (

@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 export class ProductController {
   static async getAll(req: Request, res: Response) {
-    console.log("req product");
     // const { searchString } = req.query;
     // const { collection } = req.params;
     // const productCategoryId = await prisma.product_Category.findUnique({
