@@ -6,7 +6,10 @@
 
 - [ ] landing page api
 - [x] product api
-  - [ ] product list api
+  - [x] product list api
+  - [x] product filter api
+  - [ ] product sort api
+  - [x] product search api
   - [ ] product detail api
 - [ ] product-category api
   - [x] get all product-category api
@@ -24,10 +27,10 @@
 - [ ] landing page
 - [ ] product list page
   - [x] product list
-  - [ ] product filter
+  - [x] product filter
   - [ ] product sort
   - [ ] product pagination
-  - [ ] product search
+  - [x] product search
 - [ ] product detail page
 - [ ] cart page
 - [ ] profile page
