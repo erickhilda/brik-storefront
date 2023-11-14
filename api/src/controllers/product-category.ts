@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { Request, Response } from "express";
 import { prisma } from "../../lib/prisma-service";
 
