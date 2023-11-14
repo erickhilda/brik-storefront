@@ -21,6 +21,9 @@ model Product_Category {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
   deleted_at DateTime?
+
+  @@unique([name, path])
+  @@index([name, path])
 }
 
 model Product {
@@ -34,4 +37,7 @@ model Product {
   created_at  DateTime         @default(now())
   updated_at  DateTime?        @updatedAt
   deleted_at  DateTime?
+
+  @@unique([name, category_id])
+  @@index([name, category_id])
 }
