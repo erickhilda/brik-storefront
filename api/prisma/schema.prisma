@@ -14,10 +14,13 @@ model User {
 }
 
 model Product_Category {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  path     String?   @unique
-  products Product[]
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  path       String?   @unique
+  products   Product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
 }
 
 model Product {
@@ -27,4 +30,8 @@ model Product {
   category    Product_Category @relation(fields: [category_id], references: [id])
   category_id Int
   image_url   String
+  description String           @default("")
+  created_at  DateTime         @default(now())
+  updated_at  DateTime?        @updatedAt
+  deleted_at  DateTime?
 }

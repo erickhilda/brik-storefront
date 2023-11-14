@@ -1,28 +1,20 @@
 // import { getCollection, getCollectionProducts } from 'lib/shopify';
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import Grid from "@/components/grid";
 import ProductGridItems from "@/components/layout/product-grid-items";
 import { defaultSort, sorting } from "@/lib/constants";
-import { Product } from "@/lib/api/types";
 import getProduct from "@/lib/api/product/getProduct";
 
-// export async function generateMetadata({
-//   params
-// }: {
-//   params: { collection: string };
-// }): Promise<Metadata> {
-//   const collection = await getCollection(params.collection);
-
-//   if (!collection) return notFound();
-
-//   return {
-//     title: collection.seo?.title || collection.title,
-//     description:
-//       collection.seo?.description || collection.description || `${collection.title} products`
-//   };
-// }
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}): Promise<Metadata> {
+  return {
+    title: params.category,
+  };
+}
 
 export default async function CategoryPage({
   params,

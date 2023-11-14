@@ -3,9 +3,9 @@ import { ProductCategory } from "../types";
 
 export default async function getProductCategory(params?: string) {
   try {
-    const menu = await fetcher.get<ProductCategory[]>(`product-category?${params}`);
+    const categories = await fetcher.get<ProductCategory[]>(`product-category?${params}`);
 
-    return menu.data;
+    return categories.data;
   } catch (error) {
     throw error;
   }
