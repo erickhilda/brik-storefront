@@ -1,13 +1,16 @@
 import httpStatus from "http-status";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import { prisma } from "../../lib/prisma-service";
 
-const prisma = new PrismaClient();
-
-export class ProductCategoryController {
-  static async getAll(req: Request, res: Response) {
+const ProductCategoryController = {
+  getAll: async (req: Request, res: Response) => {
     try {
-      const productCategory = await prisma.product_Category.findMany();
+      const productCategory = await prisma.product_Category.findMany({
+        orderBy: {
+          id: "asc",
+        },
+      });
 
       res.status(httpStatus.OK).json({
         message: "Success",
@@ -24,5 +27,7 @@ export class ProductCategoryController {
         });
       }
     }
-  }
-}
+  },
+};
+
+export default ProductCategoryController;
