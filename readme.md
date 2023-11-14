@@ -4,16 +4,15 @@
 
 ### API
 
-- [ ] landing page api
 - [x] product api
   - [x] product list api
+  - [x] paginate product list
   - [x] product filter api
   - [ ] product sort api
   - [x] product search api
   - [ ] product detail api
-- [ ] product-category api
+- [x] product-category api
   - [x] get all product-category api
-  - [ ] get only product-category for navbar menu
 - [ ] cart api
 - [ ] profile api
 
@@ -24,7 +23,9 @@
   - [x] navbar
   - [x] footer
   - [x] base layout
-- [ ] landing page
+- [x] landing page
+  - [x] display main prpduct on landing page
+  - [x] display carrousel on lanidng page
 - [ ] product list page
   - [x] product list
   - [x] product filter
