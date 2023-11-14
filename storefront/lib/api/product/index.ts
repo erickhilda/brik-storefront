@@ -1,1 +1,5 @@
-export const productApi = {};
+import getProduct from "./getProduct";
+
+export const productApi = {
+  getProduct,
+};

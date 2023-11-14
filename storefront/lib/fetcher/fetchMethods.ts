@@ -11,6 +11,7 @@ type RequestInit = {
   headers?: Record<string, string>;
   body?: BodyInit;
   method?: FetchMethods;
+  next?: Record<string, any>;
 };
 
 type FetchResponse<T> = {
@@ -35,6 +36,8 @@ export default function fetchMethods(): Fetcher {
     try {
       const response = await fetch(`${API_URL}/${url}`, {
         ...config,
+        // cache: "no-cache",
+        next: { revalidate: 0 },
         headers: { ...headers, ...config.headers },
       });
 
