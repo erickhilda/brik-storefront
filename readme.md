@@ -10,11 +10,11 @@
   - [x] product filter api
   - [ ] product sort api
   - [x] product search api
-  - [ ] product detail api
+  - [x] product detail api
+  - [ ] create product api
 - [x] product-category api
   - [x] get all product-category api
-- [ ] cart api
-- [ ] profile api
+- [ ] auth api
 
 ### CLIENT
 
@@ -32,6 +32,4 @@
   - [ ] product sort
   - [ ] product pagination
   - [x] product search
-- [ ] product detail page
-- [ ] cart page
-- [ ] profile page
+- [x] product detail page
