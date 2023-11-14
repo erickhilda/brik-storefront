@@ -3,7 +3,6 @@ import Prose from "@/components/prose";
 import { Product } from "@/lib/api/types";
 
 export function ProductDescription({ product }: { product: Product }) {
-  console.log("🚀 ~ ProductDescription ~ product:", product);
   return (
     <>
       <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">

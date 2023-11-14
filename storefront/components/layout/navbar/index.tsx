@@ -1,7 +1,4 @@
 import Link from "next/link";
-import { Suspense } from "react";
-// import Cart from '@/components/cart';
-import OpenCart from "@/components/cart/open-cart";
 import LogoSquare from "@/components/logo-square";
 import { SITE_NAME } from "@/lib/env";
 import { NAVBAR_MENU } from "@/lib/constants";
@@ -44,9 +41,6 @@ export default async function Navbar() {
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">
           <Search />
-        </div>
-        <div className="flex justify-end md:w-1/3">
-          <Suspense fallback={<OpenCart />}>{/* <Cart /> */}</Suspense>
         </div>
       </div>
     </nav>
