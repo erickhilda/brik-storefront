@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { Prisma } from "@prisma/client";
 import { Request, Response } from "express";
-import { prisma } from "../../lib/prisma-service";
+import { prisma } from "../lib/prisma-service";
 
 const ProductCategoryController = {
   getAll: async (req: Request, res: Response) => {
