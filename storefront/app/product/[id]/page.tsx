@@ -4,52 +4,27 @@ import { Suspense } from "react";
 
 import { GridTileImage } from "@/components/grid/tile";
 import Footer from "@/components/layout/footer";
-import { Gallery } from "@/components/product/gallery";
 import { ProductDescription } from "@/components/product/product-description";
-import { HIDDEN_PRODUCT_TAG } from "@/lib/constants";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { SingleGallery } from "@/components/product/single-gallery";
 
 export const dynamic = "force-dynamic";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { id: string };
-// }): Promise<Metadata> {
-//   const product = await api.productApi.getProductById(params.id);
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const product = await api.productApi.getProductById(params.id);
 
-//   if (!product) return notFound();
+  if (!product) return notFound();
 
-//   const { url, width, height, altText: alt } = product.featuredImage || {};
-//   const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
-
-//   return {
-//     title: product.seo.title || product.title,
-//     description: product.seo.description || product.description,
-//     robots: {
-//       index: indexable,
-//       follow: indexable,
-//       googleBot: {
-//         index: indexable,
-//         follow: indexable,
-//       },
-//     },
-//     openGraph: url
-//       ? {
-//           images: [
-//             {
-//               url,
-//               width,
-//               height,
-//               alt,
-//             },
-//           ],
-//         }
-//       : null,
-//   };
-// }
+  return {
+    title: product.name,
+    description: product.description,
+  };
+}
 
 export default async function ProductPage({
   params,
@@ -60,40 +35,11 @@ export default async function ProductPage({
 
   if (!product) return notFound();
 
-  // const productJsonLd = {
-  //   "@context": "https://schema.org",
-  //   "@type": "Product",
-  //   name: product.title,
-  //   description: product.description,
-  //   image: product.featuredImage.url,
-  //   offers: {
-  //     "@type": "AggregateOffer",
-  //     availability: product.availableForSale
-  //       ? "https://schema.org/InStock"
-  //       : "https://schema.org/OutOfStock",
-  //     priceCurrency: product.priceRange.minVariantPrice.currencyCode,
-  //     highPrice: product.priceRange.maxVariantPrice.amount,
-  //     lowPrice: product.priceRange.minVariantPrice.amount,
-  //   },
-  // };
-
   return (
     <>
-      {/* <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd),
-        }}
-      /> */}
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-4/6">
-            {/* <Gallery
-              images={product.images.map((image: Image) => ({
-                src: image.url,
-                altText: image.altText,
-              }))}
-            /> */}
             <SingleGallery product={product} />
           </div>
 
@@ -113,8 +59,9 @@ export default async function ProductPage({
 }
 
 async function RelatedProducts({ categoryId }: { categoryId: number }) {
-  const relatedProducts = await api.productApi.getProductByCategory(categoryId.toString());
-  console.log('🚀 ~ RelatedProducts ~ relatedProducts:', relatedProducts);
+  const relatedProducts = await api.productApi.getProductByCategory(
+    categoryId.toString()
+  );
 
   if (!relatedProducts) return null;
 
