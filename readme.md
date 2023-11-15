@@ -8,10 +8,10 @@
   - [x] product list api
   - [x] paginate product list
   - [x] product filter api
-  - [ ] product sort api
   - [x] product search api
   - [x] product detail api
-  - [ ] create product api
+  - [x] create product api
+  - [x] edit product api
 - [x] product-category api
   - [x] get all product-category api
 - [ ] auth api
@@ -29,7 +29,11 @@
 - [ ] product list page
   - [x] product list
   - [x] product filter
-  - [ ] product sort
   - [ ] product pagination
   - [x] product search
 - [x] product detail page
+- [ ] admin page
+  - [ ] delete product
+  - [ ] edit product
+  - [ ] add product
+  - [ ] display product as data table
