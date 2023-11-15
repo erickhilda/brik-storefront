@@ -4,14 +4,13 @@ import { Suspense } from 'react';
 import { FOOTER_MENU } from '@/lib/constants';
 import FooterMenu from '@/components/layout/footer-menu';
 import LogoSquare from '@/components/logo-square';
-
-const { COMPANY_NAME, SITE_NAME } = process.env;
+import { SITE_NAME } from '@/lib/env';
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
   const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700';
-  const copyrightName = COMPANY_NAME || SITE_NAME || '';
+  const copyrightName = SITE_NAME || '';
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
