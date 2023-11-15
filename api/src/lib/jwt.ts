@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import createError from "http-errors";
-
-const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || "";
+import { ACCESS_TOKEN_SECRET } from "./env";
 
 /**
  *
@@ -12,7 +11,7 @@ const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || "";
  */
 export function signAccessToken<T>(payload: Object): Promise<T> {
   return new Promise((resolve, reject) => {
-    jwt.sign({ payload }, accessTokenSecret, {}, (err, token) => {
+    jwt.sign({ payload }, ACCESS_TOKEN_SECRET, {}, (err, token) => {
       if (err) {
         reject(createError.InternalServerError());
       }
@@ -30,7 +29,7 @@ export function signAccessToken<T>(payload: Object): Promise<T> {
  */
 export function verifyAccessToken<T>(token: string): Promise<T> {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, accessTokenSecret, (err, payload) => {
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, payload) => {
       if (err) {
         const message =
           err.name == "JsonWebTokenError" ? "Unauthorized" : err.message;
