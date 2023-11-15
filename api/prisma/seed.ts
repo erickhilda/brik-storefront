@@ -1,4 +1,5 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcryptjs";
 import seedData from "./seed-data.json";
 enum Role {
   ADMIN = "admin",
@@ -35,10 +36,11 @@ async function main() {
 
   for (const item of user) {
     const { email, password, name } = item;
+    const hashedPassword = bcrypt.hashSync(password, 8);
     await prisma.user.create({
       data: {
         email,
-        password,
+        password: hashedPassword,
         name,
         role: Role.ADMIN,
       },
