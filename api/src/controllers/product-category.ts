@@ -10,6 +10,14 @@ const ProductCategoryController = {
         orderBy: {
           id: "asc",
         },
+        where: {
+          deleted_at: {
+            equals: null,
+          },
+          path: {
+            not: "",
+          },
+        },
       });
 
       res.status(httpStatus.OK).json({

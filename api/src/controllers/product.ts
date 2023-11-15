@@ -15,6 +15,9 @@ const ProductController = {
             path: {
               contains: category as string,
             },
+            deleted_at: {
+              equals: null,
+            },
           },
         });
         productCategoryId = productCategory?.id || null;
@@ -180,7 +183,6 @@ const ProductController = {
         },
       });
     } catch (error) {
-      console.log("🚀 ~ update: ~ error:", error);
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
           message: error.message,
