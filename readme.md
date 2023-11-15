@@ -1,5 +1,47 @@
 # BRIK-STOREFRONT
 
+## RUN INSTRUCTION
+
+### API
+
+installing dependencies
+```
+cd api
+yarn install
+# or
+npm install
+```
+set the environtment variable
+```
+cp .env.example .env
+```
+then change the value according to the example guide
+
+initializing the database
+```
+npx prisma db push
+```
+after all the step above success you can run the api server with command `yarn dev` for development or `yarn build` then `yarn start` for production.
+then open `http://localhost:5001`
+
+### CLIENT/STOREFRONT
+
+installing dependencies
+```
+cd api
+yarn install
+# or
+npm install
+```
+set the environtment variable
+```
+cp .env.example .env
+```
+then change the value according to the example guide, for `API_URL` use the value of the current running api server
+
+after all the step above success you can run the api server with command `yarn dev` for development or `yarn build` then `yarn start` for production.
+then open `http://localhost:5001`
+
 ## TODO
 
 ### API
