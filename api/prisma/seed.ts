@@ -1,12 +1,14 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import seedData from "./seed-data.json";
-console.log("🚀 ~ seedData:", seedData);
-
+enum Role {
+  ADMIN = "admin",
+  USER = "user",
+}
 const prisma = new PrismaClient();
 
 async function main() {
   console.log(`Start seeding ...`);
-  const { product, productCategory } = seedData;
+  const { product, productCategory, user } = seedData;
 
   for (const category of productCategory) {
     const { name, path } = category;
@@ -27,6 +29,18 @@ async function main() {
         price,
         category_id,
         image_url,
+      },
+    });
+  }
+
+  for (const item of user) {
+    const { email, password, name } = item;
+    await prisma.user.create({
+      data: {
+        email,
+        password,
+        name,
+        role: Role.ADMIN,
       },
     });
   }
