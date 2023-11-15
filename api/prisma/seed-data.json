@@ -1,0 +1,121 @@
+{
+  "productCategory": [
+    {
+      "name": "Snack",
+      "path": "/search/snack"
+    },
+    {
+      "name": "Drinks",
+      "path": "/search/drinks"
+    },
+    {
+      "name": "Groceries",
+      "path": "/search/groceries"
+    },
+    {
+      "name": "Kitchen Appliances",
+      "path": "/search/kitchen-appliances"
+    },
+    {
+      "name": "Cleaning",
+      "path": "/search/cleaning"
+    },
+    {
+      "name": "Light Medicines",
+      "path": "/search/light-medicines"
+    }
+  ],
+  "product": [
+    {
+      "name": "Premium Rice",
+      "price": 8990,
+      "category_id": 3,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "High-quality premium rice for your everyday meals"
+    },
+    {
+      "name": "Granulated Sugar",
+      "price": 2490,
+      "category_id": 3,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Fine granulated sugar for all your baking needs"
+    },
+    {
+      "name": "All-Purpose Flour",
+      "price": 3990,
+      "category_id": 3,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Versatile all-purpose flour for various recipes"
+    },
+    {
+      "name": "Choco Crunch",
+      "price": 5990,
+      "category_id": 1,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Delicious chocolate-flavored crunchy snack"
+    },
+    {
+      "name": "Potato Chips",
+      "price": 3490,
+      "category_id": 1,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Savory and crispy potato chips for snacking pleasure"
+    },
+    {
+      "name": "Peanut Butter Bars",
+      "price": 4790,
+      "category_id": 1,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Nutty and sweet peanut butter bars for a quick energy boost"
+    },
+    {
+      "name": "Bottled Water",
+      "price": 12500,
+      "category_id": 2,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Pure bottled water for refreshing hydration"
+    },
+    {
+      "name": "Cola",
+      "price": 19900,
+      "category_id": 2,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Classic cola for a fizzy and sweet experience"
+    },
+    {
+      "name": "Green Tea",
+      "price": 24900,
+      "category_id": 2,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Healthy green tea for a soothing beverage"
+    },
+    {
+      "name": "Tablespoon",
+      "price": 9400,
+      "category_id": 4,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Stainless steel tablespoon for precise measuring in cooking"
+    },
+    {
+      "name": "Frying Pan",
+      "price": 124500,
+      "category_id": 4,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Non-stick frying pan for easy and healthy cooking"
+    },
+    {
+      "name": "Saucepan",
+      "price": 89000,
+      "category_id": 4,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "Versatile saucepan for cooking sauces, soups, and more"
+    },
+    {
+      "name": "Sparkling water",
+      "price": 14000,
+      "category_id": 2,
+      "image_url": "https://dummyimage.com/300x300/000/fff",
+      "description": "lorem ipsum"
+    }
+  ]
+}
