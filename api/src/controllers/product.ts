@@ -1,11 +1,10 @@
 import httpStatus from "http-status";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { Request, Response } from "express";
+import { prisma } from "../lib/prisma-service";
 
-const prisma = new PrismaClient();
-
-export class ProductController {
-  static async getAll(req: Request, res: Response) {
+const ProductController = {
+  getAll: async (req: Request, res: Response) => {
     try {
       const { search, category, page, size } = req.query;
 
@@ -65,9 +64,8 @@ export class ProductController {
         });
       }
     }
-  }
-
-  static async getById(req: Request, res: Response) {
+  },
+  getById: async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
 
@@ -92,9 +90,8 @@ export class ProductController {
         });
       }
     }
-  }
-
-  static async getByCategory(req: Request, res: Response) {
+  },
+  getByCategory: async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
 
@@ -119,5 +116,88 @@ export class ProductController {
         });
       }
     }
-  }
-}
+  },
+  create: async (req: Request, res: Response) => {
+    try {
+      const { name, description, price, category_id, image_url } = req.body;
+
+      const product = await prisma.product.create({
+        data: {
+          name,
+          description,
+          price,
+          category_id,
+          image_url,
+        },
+      });
+
+      res.status(httpStatus.CREATED).json({
+        message: "Success",
+        data: {
+          id: product.id,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+    }
+  },
+  update: async (req: Request, res: Response) => {
+    try {
+      const { name, description, price, category_id, image_url } = req.body;
+      const { id } = req.params;
+
+      const product = await prisma.product.update({
+        where: {
+          id: parseInt(id),
+        },
+        data: {
+          name,
+          description,
+          price,
+          category_id,
+          image_url,
+        },
+      });
+
+      res.status(httpStatus.OK).json({
+        message: "Success",
+        data: {
+          id: product.id,
+        },
+      });
+    } catch (error) {
+      console.log("🚀 ~ update: ~ error:", error);
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+    }
+  },
+};
+
+export default ProductController;
