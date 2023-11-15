@@ -1,5 +1,4 @@
-import jwt, { SignOptions } from "jsonwebtoken";
-import config from "config";
+import jwt from "jsonwebtoken";
 import createError from "http-errors";
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || "";

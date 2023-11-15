@@ -1,5 +1,6 @@
 import * as bcrypt from "bcryptjs";
-import httpStatus from "http-errors";
+import httpErrors from "http-errors";
+import httpStatus from "http-status";
 import * as jwt from "../lib/jwt";
 import { prisma } from "../lib/prisma-service";
 import { Request, Response } from "express";
@@ -49,11 +50,11 @@ async function login(data: UserAuthData) {
       },
     });
     if (!user) {
-      throw httpStatus.NotFound("User not registered");
+      throw httpErrors.NotFound("User not registered");
     }
     const checkPassword = bcrypt.compareSync(password, user.password);
     if (!checkPassword)
-      throw httpStatus.Unauthorized("Email address or password not valid");
+      throw httpErrors.Unauthorized("Email address or password not valid");
     const { password: userPassword, ...userWithoutPassword } = user;
     const accessToken = await jwt.signAccessToken(userWithoutPassword);
     return { ...userWithoutPassword, accessToken };
@@ -66,17 +67,17 @@ export const AuthController = {
   authRegister: async (req: Request, res: Response) => {
     try {
       const data = await register(req.body);
-      res.status(201).json({
+      res.status(httpStatus.CREATED).json({
         message: "User registered",
         data,
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        res.status(400).json({
+        res.status(httpStatus.BAD_REQUEST).json({
           message: error.message,
         });
-      } else if (error instanceof httpStatus.HttpError) {
-        res.status(500).json({
+      } else if (error instanceof httpErrors.HttpError) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
           message: error.message,
         });
       }
@@ -85,18 +86,17 @@ export const AuthController = {
   authLogin: async (req: Request, res: Response) => {
     try {
       const data = await login(req.body);
-      res.status(201).json({
+      res.status(httpStatus.OK).json({
         message: "User logged in",
         data,
       });
     } catch (error) {
-      console.log("🚀 ~ authLogin: ~ error:", error);
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        res.status(400).json({
+        res.status(httpStatus.BAD_REQUEST).json({
           message: error.message,
         });
-      } else if (error instanceof httpStatus.HttpError) {
-        res.status(500).json({
+      } else if (error instanceof httpErrors.HttpError) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
           message: error.message,
         });
       }
