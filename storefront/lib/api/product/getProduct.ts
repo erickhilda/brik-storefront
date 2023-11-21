@@ -5,7 +5,7 @@ export default async function getProduct(params?: string) {
   try {
     const products = await fetcher.get<Product[]>(`product?${params}`);
 
-    return products.data;
+    return products
   } catch (error) {
     throw error;
   }

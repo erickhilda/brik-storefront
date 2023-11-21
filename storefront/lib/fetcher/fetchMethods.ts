@@ -17,6 +17,7 @@ type RequestInit = {
 type FetchResponse<T> = {
   data?: T;
   message?: string;
+  count?: number;
 };
 
 type Fetcher = {

@@ -20,23 +20,23 @@ export default async function SearchPage({
   const products = await api.productApi.getProduct(
     `search=${searchValue || ""}`
   );
-  const resultsText = products && products?.length > 1 ? "results" : "result";
+  const resultsText = products.data && products.data?.length > 1 ? "results" : "result";
 
   return (
     <>
       {searchValue ? (
         <p className="mb-4">
-          {products?.length === 0
+          {products.data?.length === 0
             ? "There are no products that match "
-            : `Showing ${products?.length} ${resultsText} for `}
+            : `Showing ${products.data?.length} ${resultsText} for `}
           <span className="font-bold">&quot;{searchValue}&quot;</span>
         </p>
       ) : null}
-      {products ? (
+      {products.data ? (
         <>
-          {products?.length > 0 ? (
+          {products.data?.length > 0 ? (
             <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              <ProductGridItems products={products || []} />
+              <ProductGridItems products={products.data || []} />
             </Grid>
           ) : null}
         </>

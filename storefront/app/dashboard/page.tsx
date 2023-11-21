@@ -1,13 +1,23 @@
+import ProductTable from "@/components/dashboard/product-table";
+import { api } from "@/lib/api";
+
 export const metadata = {
   title: "Admin Dashboard",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const { page, size } = searchParams as { [key: string]: string };
+
+  const products = await api.productApi.getProduct(
+    `page=${page || 0}&size=${size || 10}`
+  );
   return (
-    <div className="grid grid-cols-12 mt-5">
-      <div className="col-span-4 col-start-5 flex flex-col items-center p-4 border dark:border-neutral-800 rounded-md">
-        dashboard
-      </div>
-    </div>
+    <>
+      <ProductTable products={products.data || []} count={products.count || 0} />
+    </>
   );
 }

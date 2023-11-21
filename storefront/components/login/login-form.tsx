@@ -27,7 +27,6 @@ export default function LoginForm() {
         router.push("/dashboard");
       }
     } catch (error) {
-      console.log("🚀 ~ onSubmit ~ error:", error);
       if (error instanceof Error) {
         setErrorMessages([error.message]);
       }
