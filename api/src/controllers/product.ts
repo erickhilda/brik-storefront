@@ -28,8 +28,8 @@ const ProductController = {
 
       const searchByKeyword: Prisma.ProductWhereInput = search
         ? {
-            OR: [{ name: { contains: search as string, mode: "insensitive" } }],
-          }
+          OR: [{ name: { contains: search as string, mode: "insensitive" } }],
+        }
         : {};
 
       const offset = page
@@ -52,8 +52,21 @@ const ProductController = {
         },
       });
 
+      // get total data
+      const totalData = await prisma.product.count({
+        where: {
+          ...searchByCategory,
+          ...searchByKeyword,
+          id: {
+            not: 0,
+          },
+        },
+      });
+
+
       res.status(httpStatus.OK).json({
         message: "Success",
+        count: totalData,
         data: products,
       });
     } catch (error) {

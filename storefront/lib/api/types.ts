@@ -1,4 +1,4 @@
-export interface ProductCategory {
+export type ProductCategory = {
   id: number;
   name: string;
   path: string;
@@ -7,7 +7,7 @@ export interface ProductCategory {
   deleted_at: Date | null;
 }
 
-export interface Product {
+export type Product = {
   id: string;
   name: string;
   price: number;
@@ -18,3 +18,4 @@ export interface Product {
   updated_at: Date | null;
   deleted_at: Date | null;
 }
+
