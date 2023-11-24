@@ -27,13 +27,19 @@ export default async function CategoryPage({
     sorting.find((item) => item.slug === sort) || defaultSort;
   const products = await getProduct(`category=${params.category}`);
 
+  const { data } = products;
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <section>
-      {products?.length === 0 ? (
+      {data?.length === 0 ? (
         <p className="py-3 text-lg">{`No products found in this collection`}</p>
       ) : (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems products={products || []} />
+          <ProductGridItems products={data || []} />
         </Grid>
       )}
     </section>
