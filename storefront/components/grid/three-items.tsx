@@ -47,14 +47,13 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-
   const homepageItems = await api.productApi.getProduct("?page=1&limit=3");
 
   if (!homepageItems) return null;
+  const { data } = homepageItems;
+  if (!data) return null;
 
-  if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
-
-  const [firstProduct, secondProduct, thirdProduct] = homepageItems;
+  const [firstProduct, secondProduct, thirdProduct] = data;
 
   return (
     <section className="mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2">
