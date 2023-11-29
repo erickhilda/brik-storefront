@@ -5,7 +5,7 @@ export default async function addProduct(body: {
   description: string;
   price: number;
   category_id: number;
-  image: string;
+  image_url: string;
 }, token: string) {
   try {
     const product = await fetcher.post<{ id: number }>("product", {

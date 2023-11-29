@@ -183,8 +183,8 @@ const ProductController = {
         data: {
           name,
           description,
-          price,
-          category_id,
+          price: Number(price),
+          category_id: Number(category_id),
           image_url,
         },
       });

@@ -2,7 +2,7 @@
 
 import { ProductCategory } from "@/lib/api/types";
 import clsx from "clsx";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 function ProductForm({
@@ -24,6 +24,7 @@ function ProductForm({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
   const isEditPage = pathname.includes("edit");
   const isAddPage = pathname.includes("add");
 
@@ -33,6 +34,28 @@ function ProductForm({
     try {
       const response = await fetch("/api/product", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        throw response.statusText;
+      }
+
+      const { data, message } = await response.json();
+
+      if (data.id) {
+        router.push("/dashboard?page=1&size=10");
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function editProduct(body: any) {
+    try {
+      const response = await fetch(`/api/product/${params.id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
@@ -79,6 +102,7 @@ function ProductForm({
       }
 
       if (isEditPage) {
+        await editProduct(body);
       }
     } catch (error) {
       console.error(error);

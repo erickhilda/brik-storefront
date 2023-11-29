@@ -14,6 +14,7 @@ import { ReactNode, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createUrl } from "@/lib/utils";
 import clsx from "clsx";
+import Link from "next/link";
 
 function ButtonIcon({
   children,
@@ -31,7 +32,7 @@ function ButtonIcon({
 }
 
 const columnHelper =
-  createColumnHelper<Pick<Product, "name" | "description" | "price">>();
+  createColumnHelper<Pick<Product, "name" | "description" | "price" | "id">>();
 
 const columns = [
   columnHelper.accessor("name", {
@@ -43,11 +44,21 @@ const columns = [
   columnHelper.accessor("price", {
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("actions", {
-    cell: () => (
+  columnHelper.accessor("id", {
+    cell: (info) => (
       <div className="flex items-center justify-center gap-2">
-        <button className="rounded py-1 px-4 text-sm bg-blue-500">Edit</button>
-        <button className="rounded py-1 px-4 text-sm bg-red-500">Delete</button>
+        <Link
+          href={`/dashboard/${info.getValue()}/edit`}
+          className="rounded px-4 py-1 text-sm bg-blue-500 hover:bg-blue-600"
+        >
+          Edit
+        </Link>
+        <Link
+          href={`/dashboard/${info.getValue()}/delete`}
+          className="rounded px-4 py-1 text-sm bg-red-500 hover:bg-red-600"
+        >
+          Delete
+        </Link>
       </div>
     ),
   }),
