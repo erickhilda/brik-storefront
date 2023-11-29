@@ -13,10 +13,18 @@ import { Product } from "@/lib/api/types";
 import { ReactNode, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createUrl } from "@/lib/utils";
+import clsx from "clsx";
 
-function ButtonIcon({ children, ...props }: { children: ReactNode }) {
+function ButtonIcon({
+  children,
+  ...props
+}: {
+  children: ReactNode;
+  props: HTMLButtonElement;
+}) {
+  const { className } = props;
   return (
-    <button className="border rounded p-2" {...props}>
+    <button className={clsx("border rounded p-2", className)} {...props}>
       {children}
     </button>
   );
@@ -45,11 +53,17 @@ const columns = [
   }),
 ];
 
-export default function ProductTable({ products, count = 0 }: { products: Product[], count: number }) {
+export default function ProductTable({
+  products,
+  count = 0,
+}: {
+  products: Product[];
+  count: number;
+}) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
-  })
+  });
 
   const table = useReactTable({
     columns,
@@ -57,7 +71,7 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
     manualPagination: true,
     pageCount: Math.ceil(count / pagination.pageSize),
     state: {
-      pagination
+      pagination,
     },
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
@@ -66,22 +80,36 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
   });
 
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   function onChangeToPreviousPage() {
-    router.push(createUrl(pathname, new URLSearchParams({
-      size: searchParams.get('size') || 10,
-      page: searchParams.get('page') ? Number(searchParams.get('page')) - 1 : 0
-    })))
-    table.previousPage()
+    router.push(
+      createUrl(
+        pathname,
+        new URLSearchParams({
+          size: searchParams.get("size") || 10,
+          page: searchParams.get("page")
+            ? Number(searchParams.get("page")) - 1
+            : 0,
+        })
+      )
+    );
+    table.previousPage();
   }
 
   function onChangeToNextPage() {
-    router.push(createUrl(pathname, new URLSearchParams({
-      size: searchParams.get('size') || 10,
-      page: searchParams.get('page') ? Number(searchParams.get('page')) + 1 : 1
-    })))
-    table.nextPage()
+    router.push(
+      createUrl(
+        pathname,
+        new URLSearchParams({
+          size: searchParams.get("size") || 10,
+          page: searchParams.get("page")
+            ? Number(searchParams.get("page")) + 1
+            : 1,
+        })
+      )
+    );
+    table.nextPage();
   }
 
   return (
@@ -98,9 +126,9 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                 </th>
               ))}
             </tr>
@@ -108,7 +136,10 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr
+              key={row.id}
+              className="hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
@@ -134,7 +165,7 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
-            {table.getState().pagination.pageIndex + 1} of{' '}
+            {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </strong>
         </span>
@@ -148,9 +179,20 @@ export default function ProductTable({ products, count = 0 }: { products: Produc
         </ButtonIcon>
 
         <span className="flex items-center gap-1">
-          Showing {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} - {" "}
-          {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + table.getState().pagination.pageSize > count ? count : table.getState().pagination.pageIndex * table.getState().pagination.pageSize + table.getState().pagination.pageSize}
-          {" "}of {count}
+          Showing{" "}
+          {table.getState().pagination.pageIndex *
+            table.getState().pagination.pageSize +
+            1}{" "}
+          -{" "}
+          {table.getState().pagination.pageIndex *
+            table.getState().pagination.pageSize +
+            table.getState().pagination.pageSize >
+          count
+            ? count
+            : table.getState().pagination.pageIndex *
+                table.getState().pagination.pageSize +
+              table.getState().pagination.pageSize}{" "}
+          of {count}
         </span>
       </div>
     </div>

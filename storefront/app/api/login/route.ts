@@ -1,8 +1,8 @@
 import { API_URL } from "@/lib/env";
-import { access } from "fs";
 import { cookies } from "next/headers";
 
-export const dynamic = "force-dynamic"; // defaults to force-static
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request, response: Response) {
   try {
     const cookiesStore = cookies();

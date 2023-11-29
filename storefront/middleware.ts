@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("auth") && accessToken) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/dashboard?page=1&size=10", request.url));
   }
 }
 
