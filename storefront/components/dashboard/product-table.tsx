@@ -31,6 +31,27 @@ function ButtonIcon({
   );
 }
 
+async function deleteProduct(id: string) {
+  try {
+    const response = await fetch(`/api/product/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw response.statusText;
+    }
+
+    const { data, message } = await response.json();
+
+    if (data.id) {
+      window.location.reload();
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 const columnHelper =
   createColumnHelper<Pick<Product, "name" | "description" | "price" | "id">>();
 
@@ -53,12 +74,12 @@ const columns = [
         >
           Edit
         </Link>
-        <Link
-          href={`/dashboard/${info.getValue()}/delete`}
+        <button
+          onClick={() => deleteProduct(info.getValue())}
           className="rounded px-4 py-1 text-sm bg-red-500 hover:bg-red-600"
         >
           Delete
-        </Link>
+        </button>
       </div>
     ),
   }),

@@ -11,7 +11,8 @@ router
 router
   .route("/:id")
   .get(ProductController.getById)
-  .put(auth, ProductController.update);
+  .put(auth, ProductController.update)
+  .delete(auth, ProductController.delete);
 router.route("/category/:id").get(ProductController.getByCategory);
 
 export default router;

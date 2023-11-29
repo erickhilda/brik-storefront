@@ -44,6 +44,9 @@ const ProductController = {
           id: {
             not: 0,
           },
+          deleted_at: {
+            equals: null,
+          }
         },
         skip: offset,
         take: limit,
@@ -60,6 +63,9 @@ const ProductController = {
           id: {
             not: 0,
           },
+          deleted_at: {
+            equals: null,
+          }
         },
       });
 
@@ -213,6 +219,43 @@ const ProductController = {
       }
     }
   },
+  delete: async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      const product = await prisma.product.update({
+        where: {
+          id: parseInt(id),
+        },
+        data: {
+          deleted_at: new Date(),
+        },
+      });
+
+      res.status(httpStatus.OK).json({
+        message: "Success",
+        data: {
+          id: product.id,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+      if (error instanceof Error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: error.message,
+        });
+      }
+    }
+  }
 };
 
 export default ProductController;
